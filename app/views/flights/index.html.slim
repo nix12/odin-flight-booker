@@ -2,20 +2,22 @@
 	.col-md-6.col-md-offset-3
 
 		= form_tag flights_path, method: 'get'
-			= label_tag :from
-			= select_tag(:start_airport_id, options_for_select(@airports))
+			.form-group.col-md-6
+				= label_tag :from
+				= select_tag(:start_airport_id, options_for_select(@airports), class: 'form-control')
 
-			= label_tag :to
-			= select_tag(:end_airport_id, options_for_select(@airports))
+				= label_tag :to
+				= select_tag(:end_airport_id, options_for_select(@airports), class: 'form-control')
+			.form-group.col-md-6
+				= label_tag :date
+				= select_tag(:date_id, options_for_select(@dates), class: 'form-control')
+				
+				= label_tag :passenger
+				= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
+																												['3', 3], ['4', 4]]), class: 'form-control')
 
-			= label_tag :date
-			= select_tag(:date_id, options_for_select(@dates))
-			
-			= label_tag :passenger
-			= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
-																											['3', 3], ['4', 4]]))
-
-			= submit_tag :submit
+			.form-group
+				= submit_tag :Search, class: 'btn btn-primary btn-block'
 
 
 - @searches.find_each do |flight|

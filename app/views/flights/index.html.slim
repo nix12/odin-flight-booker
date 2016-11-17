@@ -20,5 +20,30 @@
 				= submit_tag :Search, class: 'btn btn-primary btn-block'
 
 
+		= form_tag flights_path, method: 'get', class: 'search-form'
+			
+				/ p = p flight.inspect
+				table.table.table-hover
+					tr
+						th Select
+						th Departure
+						th Destination
+						th Date
+						th Duration
+					tbody
+						- @searches.find_each do |flight|
+							tr
+								td = radio_button_tag(:select_id, :select)
+								td = flight.from_airport.code
+								td = flight.to_airport.code
+								td = flight.date
+								td = flight.duration
+
+				= hidden_field_tag(:passenger_id, params[:passenger_id])
+				= submit_tag(:Submit, class: 'btn btn-primary btn-block')
+
+
+
+
 - @searches.find_each do |flight|
 	p = p flight.inspect

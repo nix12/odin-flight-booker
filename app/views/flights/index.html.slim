@@ -1,14 +1,49 @@
-= form_tag '/flights', method: 'get'
-	= label_tag :from
-	= select_tag(:airport_id, options_for_select(@airports.pluck(:code)))
+.row
+	.col-md-6.col-md-offset-3
 
-	= label_tag :to
-	= select_tag(:airport_id, options_for_select(@airports.pluck(:code)))
+		= form_tag flights_path, method: 'get'
+			.form-group.col-md-6
+				= label_tag :from
+				= select_tag(:start_airport_id, options_for_select(@airports), class: 'form-control')
 
-	= label_tag :date
-	= select_date(Date.today, prefix: :start_date)
-	
-	= label_tag :passenger
-	= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
-																									['3', 3], ['4', 4]]))
+				= label_tag :to
+				= select_tag(:end_airport_id, options_for_select(@airports), class: 'form-control')
+			.form-group.col-md-6
+				= label_tag :date
+				= select_tag(:date_id, options_for_select(@dates), class: 'form-control')
+				
+				= label_tag :passenger
+				= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
+																												['3', 3], ['4', 4]]), class: 'form-control')
 
+			.form-group
+				= submit_tag :Search, class: 'btn btn-primary btn-block'
+
+
+		= form_tag bookings_new_path, method: 'get', class: 'search-form'
+			
+				/ p = p flight.inspect
+				table.table.table-hover
+					tr
+						th Select
+						th Departure
+						th Destination
+						th Date
+						th Duration
+					tbody
+						- @searches.find_each do |flight|
+							tr
+								td = radio_button_tag(:select_id, :select)
+								td = flight.from_airport.code
+								td = flight.to_airport.code
+								td = flight.date
+								td = flight.duration
+
+				= hidden_field_tag(:passenger_id, params[:passenger_id])
+				= submit_tag(:Submit, class: 'btn btn-primary btn-block')
+
+
+
+
+- @searches.find_each do |flight|
+	p = p flight.inspect

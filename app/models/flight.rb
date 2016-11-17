@@ -6,4 +6,14 @@ class Flight < ActiveRecord::Base
   def self.all_airports
   	Airport.all
   end
+
+  def self.all_dates
+		Flight.pluck(:date).uniq.sort  	
+  end
+
+  def self.search(start, finish, date)
+  	Flight.where(start_airport_id: start,
+  							 end_airport_id: finish,
+  							 date: date)
+  end
 end

@@ -1,14 +1,22 @@
-= form_tag '/flights', method: 'get'
-	= label_tag :from
-	= select_tag(:airport_id, options_for_select(@airports.pluck(:code)))
+.row
+	.col-md-6.col-md-offset-3
 
-	= label_tag :to
-	= select_tag(:airport_id, options_for_select(@airports.pluck(:code)))
+		= form_tag flights_path, method: 'get'
+			= label_tag :from
+			= select_tag(:start_airport_id, options_for_select(@airports))
 
-	= label_tag :date
-	= select_date(Date.today, prefix: :start_date)
-	
-	= label_tag :passenger
-	= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
-																									['3', 3], ['4', 4]]))
+			= label_tag :to
+			= select_tag(:end_airport_id, options_for_select(@airports))
 
+			= label_tag :date
+			= select_tag(:date_id, options_for_select(@dates))
+			
+			= label_tag :passenger
+			= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
+																											['3', 3], ['4', 4]]))
+
+			= submit_tag :submit
+
+
+- @searches.find_each do |flight|
+	p = p flight.inspect

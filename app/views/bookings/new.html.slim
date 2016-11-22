@@ -1,0 +1,28 @@
+.row
+	.col-md-6.col-md-offset-3
+		table.table
+			tr
+				th Flight Number
+				th Departure
+				th Destination
+				th Date
+				th Passengers
+			tbody
+				tr
+					td = @flight.id
+					td = @flight.from_airport.code
+					td = @flight.to_airport.code
+					td = @flight.date
+					td = @passenger
+		= form_for @booking do |f|	
+			= f.fields_for :passengers do |p|
+				= p.label :name
+				= p.text_field :name, class: 'form-control'
+
+				= p.label :email
+				= p.text_field :email, class: 'form-control'
+
+				= hidden_field_tag :flight_id, params[:flight_id]
+				= hidden_field_tag :passenger, params[:passenger]
+
+			= f.submit 'Finish', class: 'btn btn-primary btn-block'

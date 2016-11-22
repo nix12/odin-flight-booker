@@ -1,0 +1,35 @@
+h1.center Booking Information
+table.table
+	thead
+		th Booking Number
+		th Flight Number
+		th Derparture
+		th Destination
+		th Date
+	tbody
+		td = @booking.id
+		td = @booking.flight_id
+		td = @booking.flight.from_airport.code
+		td = @booking.flight.to_airport.code
+		td = @booking.flight.date
+
+h1.center Passenger Information
+table.table
+	thead
+		th Booking Number 
+		th Passenger Number
+		th Flight Number
+		th Name
+		th E-mail
+	tbody
+		- @booking.passengers.each do |passenger|
+			tr
+				td = @booking.id
+				td = passenger.id
+				td = @booking.flight_id
+				td = passenger.name
+				td = passenger.email
+	
+
+
+

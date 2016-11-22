@@ -13,16 +13,15 @@
 				= select_tag(:date_id, options_for_select(@dates), class: 'form-control')
 				
 				= label_tag :passenger
-				= select_tag(:pessenger_id, options_for_select([['1', 1], ['2', 2],
-																												['3', 3], ['4', 4]]), class: 'form-control')
+				= select_tag(:passenger, options_for_select([[1, 1], [2, 2],
+																												[3, 3], [4, 4]]), class: 'form-control')
 
 			.form-group
 				= submit_tag :Search, class: 'btn btn-primary btn-block'
 
 
-		= form_tag flights_path, method: 'get', class: 'search-form'
-			
-				/ p = p flight.inspect
+
+		= form_tag new_booking_path, method: 'get', class: 'search-form'
 				table.table.table-hover
 					tr
 						th Select
@@ -33,17 +32,11 @@
 					tbody
 						- @searches.find_each do |flight|
 							tr
-								td = radio_button_tag(:select_id, :select)
+								td = radio_button_tag(:flight_id, flight.id)
 								td = flight.from_airport.code
 								td = flight.to_airport.code
 								td = flight.date
 								td = flight.duration
 
-				= hidden_field_tag(:passenger_id, params[:passenger_id])
+				= hidden_field_tag(:passenger, params[:passenger])
 				= submit_tag(:Submit, class: 'btn btn-primary btn-block')
-
-
-
-
-- @searches.find_each do |flight|
-	p = p flight.inspect
